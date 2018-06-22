@@ -29,7 +29,7 @@ public class Loop implements Runnable {
 	private Keyboard keyboard;
 	private MouseClicker mouse;
 	
-	private static GameState currentState = GameState.menu;
+	private static GameState currentState = GameState.game;
 
 	public Loop(String title, int width, int height) {
 		this.width = width;
