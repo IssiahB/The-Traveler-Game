@@ -60,7 +60,7 @@ public class MainMenu implements Menu {
 			if(inRect(x, y, play) && released) {
 				playColor = Color.GRAY;
 				WorldHandler.loadWorld(Worlds.world1);
-				MenuManager.setCurrentMenu(Menus.choose);
+				Loop.setCurrentState(GameState.game);
 			}
 		
 		if(inRect(x, y, createWorld) && pressed) {
