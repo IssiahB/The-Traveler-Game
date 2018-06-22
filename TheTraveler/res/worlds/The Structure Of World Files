@@ -1,0 +1,7 @@
+The first two numbers are the size of the world
+The second two numbers are the x and y coordinate of the player
+The third two numbers are the x and y coordinate of the exit block 
+after that all the other x, y's up till the -1 in the middle are the enemies x and y coordinate
+The rest are x, y's of other blocks the n, v, and h tell the computer if the block moves vertical, horizontal, or not at all
+Then after that if it has an v or a h there will be two more numbers for the distance and the speed
+To end the file reading at the end of the file add a -1
