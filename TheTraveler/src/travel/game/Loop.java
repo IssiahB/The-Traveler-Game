@@ -32,8 +32,8 @@ public class Loop implements Runnable {
 	private static GameState currentState = GameState.menu;
 
 	public Loop(String title, int width, int height) {
-		this.width = width;
-		this.height = height;
+		Loop.width = width;
+		Loop.height = height;
 		this.title = title;
 	}
 
@@ -141,7 +141,7 @@ public class Loop implements Runnable {
 		}
 		
 		if(currentState == GameState.menu) {
-			menu.getCurrentMenu().render(g);
+			MenuManager.getCurrentMenu().render(g);
 		}
 		
 		bs.show();
