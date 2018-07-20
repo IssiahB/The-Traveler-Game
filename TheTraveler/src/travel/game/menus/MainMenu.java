@@ -7,15 +7,13 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import travel.game.GameState;
 import travel.game.Loop;
 import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;
+import travel.game.menus.utils.MenuTemplate;
 import travel.game.menus.utils.Menus;
-import travel.game.worlds.WorldHandler;
-import travel.game.worlds.Worlds;
 
-public class MainMenu implements Menu {
+public class MainMenu extends MenuTemplate implements Menu {
 	
 	private BufferedImage image;
 	
@@ -28,28 +26,10 @@ public class MainMenu implements Menu {
 	private Color createColor = Color.GRAY;
 	private Color setColor = Color.GRAY;
 	private Color exitColor = Color.GRAY;
-	private Font font = new Font("TimesNewRoman", 3, 40);
 	private Font titleFont = new Font("TimesNewRoman", 2, 70);
 	
 	public MainMenu(BufferedImage image) {
 		this.image = image;
-	}
-	
-	private void drawButton(Graphics2D g2, Rectangle rect, Color color) {
-		g2.setColor(color);
-		g2.fill(rect);
-	}
-	
-	private boolean inRect(int x, int y, Rectangle rect) {
-		y = y + 25;
-		
-		if(x > rect.getX() && x < (rect.getX() + rect.getWidth())) {
-			if(y > rect.getY() && y < (rect.getY() + rect.getHeight())) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	@Override
@@ -90,17 +70,21 @@ public class MainMenu implements Menu {
 	public void render(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		
+		// draw Background image
 		g.drawImage(image, 0, 0, Loop.getWidth(), Loop.getHeight(), null);
 		
+		// draw Title
 		g.setFont(titleFont);
 		g.setColor(Color.white);
 		g.drawString("The Traveler", Loop.getWidth()/3-70, 50);
 		
+		// draw buttons
 		drawButton(g2, play, playColor);
 		drawButton(g2, createWorld, createColor);
 		drawButton(g2, settings, setColor);
 		drawButton(g2, exit, exitColor);
 		
+		// draw button labels
 		g.setFont(font);
 		g.setColor(Color.white);
 		g.drawString("Play", (int) (play.getX() + 55), (int) (play.getY() + 35));

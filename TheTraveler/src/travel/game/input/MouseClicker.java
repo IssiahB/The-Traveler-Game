@@ -11,11 +11,9 @@ import travel.game.worlds.WorldHandler;
 public class MouseClicker implements MouseListener {
 	
 	private WorldHandler world;
-	private MenuManager menu;
 	
-	public MouseClicker(WorldHandler world, MenuManager menu) {
+	public MouseClicker(WorldHandler world) {
 		this.world = world;
-		this.menu = menu;
 	}
 	
 	@Override
@@ -33,8 +31,8 @@ public class MouseClicker implements MouseListener {
 		int x = e.getX();
 		int y = (e.getY() - 25);
 		
-		if(Loop.getCurrentState() == GameState.menu) {
-			menu.getCurrentMenu().update(x, y, true, false);
+		if(Loop.getCurrentState() == GameState.menu || Loop.getCurrentState() == GameState.pause) {
+			MenuManager.getCurrentMenu().update(x, y, true, false);
 		}
 	}
 
@@ -43,8 +41,8 @@ public class MouseClicker implements MouseListener {
 		int x = e.getX();
 		int y = (e.getY() - 25);
 		
-		if(Loop.getCurrentState() == GameState.menu) {
-			menu.getCurrentMenu().update(x, y, false, true);
+		if(Loop.getCurrentState() == GameState.menu || Loop.getCurrentState() == GameState.pause) {
+			MenuManager.getCurrentMenu().update(x, y, false, true);
 		}
 	}
 

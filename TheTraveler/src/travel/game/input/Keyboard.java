@@ -6,14 +6,14 @@ import java.awt.event.KeyListener;
 public class Keyboard implements KeyListener{
 	
 	private boolean[] keys = new boolean[170];
-	public boolean up, down, left, right, space;
+	public boolean up, down, left, right, escape;
 	
 	public void update() {
 		up = keys[KeyEvent.VK_W];
 		down = keys[KeyEvent.VK_S];
 		right = keys[KeyEvent.VK_D];
 		left = keys[KeyEvent.VK_A];
-		space = keys[KeyEvent.VK_SPACE];
+		escape = keys[KeyEvent.VK_ESCAPE];
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class Player extends Entity {
 	private static int staticX, staticY;
 	private static int staticWidth, staticHeight;
 	private static boolean up = false, down = false, left = false, right = false;
+	private static boolean dead = false;
 
 	private byte maxSpeed = 4;
 	private int speed = 2;
@@ -129,5 +130,13 @@ public class Player extends Entity {
 
 	public static int getStaticHeight() {
 		return staticHeight;
+	}
+
+	public static boolean isDead() {
+		return dead;
+	}
+
+	public static void setDead(boolean dead) {
+		Player.dead = dead;
 	}
 }

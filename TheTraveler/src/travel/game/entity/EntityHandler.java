@@ -11,12 +11,6 @@ public class EntityHandler {
 	public void update() {
 		for(int i = 0; i < objects.size(); i++) {
 			objects.get(i).update(this);
-			
-			if(i < objects.size()) {
-				if(objects.get(i).width < 5 || objects.get(i).height < 5) {
-					removeEntity(objects.get(i));
-				}
-			}
 		}
 	}
 	

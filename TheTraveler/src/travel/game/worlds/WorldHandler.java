@@ -37,12 +37,16 @@ public class WorldHandler {
 	private static Point playerXY = null;
 	private static Point exitXY = null;
 	
+	private static Worlds pickedWorld;
+	
 	public WorldHandler(Loop loop) {
 		this.loop = loop;
 	}
 	
 	public static void loadWorld(Worlds world) {
 		clearWorld();
+		
+		pickedWorld = world;
 		
 		switch (world) {
 			case world1:
@@ -116,6 +120,7 @@ public class WorldHandler {
 	
 	public static void clearWorld() {
 		entities.cleanUp();
+		input.cleanUp();
 		background = null;
 		enemyPosition = null;
 		blockPosition = null;
@@ -165,5 +170,9 @@ public class WorldHandler {
 	
 	public Translation getTranslate() {
 		return translate;
+	}
+
+	public static Worlds getPickedWorld() {
+		return pickedWorld;
 	}
 }

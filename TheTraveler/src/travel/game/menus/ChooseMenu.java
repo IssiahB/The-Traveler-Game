@@ -11,10 +11,11 @@ import java.util.List;
 import travel.game.GameState;
 import travel.game.Loop;
 import travel.game.menus.utils.Menu;
+import travel.game.menus.utils.MenuTemplate;
 import travel.game.worlds.WorldHandler;
 import travel.game.worlds.Worlds;
 
-public class ChooseMenu implements Menu {
+public class ChooseMenu extends MenuTemplate implements Menu {
 	
 	private BufferedImage image;
 	private List<Rectangle> levels = new ArrayList<Rectangle>();
@@ -32,19 +33,6 @@ public class ChooseMenu implements Menu {
 		levels.add(new Rectangle(x, y, width, height));
 		colors.add(Color.gray);
 		levelNames.add(name);
-	}
-	
-	private boolean inRect(int x, int y, Rectangle rect) {
-		y = y + 25;
-		
-		if (x > rect.getX() && x < (rect.getX() + rect.getWidth())) {
-			if (y > rect.getY()
-					&& y < (rect.getY() + rect.getHeight())) {
-				return true;
-			}
-		}
-		
-		return false;
 	}
 	
 	private Worlds getChoosenWorld(String name) {

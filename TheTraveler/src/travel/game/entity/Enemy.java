@@ -29,7 +29,7 @@ public class Enemy extends Entity {
 			}
 
 			if (collider.touchedByPlayer(entities.getObjects().get(i))) {
-				entities.removeEntity(entities.getObjects().get(i));
+				Player.setDead(true);
 			}
 			
 			if (collider.touchedByEnemy(entities.getObjects().get(i))) {

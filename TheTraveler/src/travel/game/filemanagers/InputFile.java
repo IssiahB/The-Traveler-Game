@@ -76,6 +76,17 @@ public class InputFile {
 			s.close();
 		}
 	}
+	
+	public void cleanUp() {
+	/*	x = 0;
+		y = 0;
+		width = 0;
+		height = 0;
+		exit = null;
+		blockPosition = null;
+		blockSlidables = null;
+		enemyPosition = null; */
+	}
 
 	public int getWidth() {
 		return width;

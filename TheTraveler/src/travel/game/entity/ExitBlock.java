@@ -8,7 +8,7 @@ import travel.game.util.ImageHandler;
 
 public class ExitBlock extends Entity{
 	
-	private boolean exit = false;
+	private static boolean exit = false;
 
 	public ExitBlock(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -39,8 +39,12 @@ public class ExitBlock extends Entity{
 		return new Rectangle(x, y, width, height);
 	}
 
-	public boolean isExit() {
+	public static boolean isExit() {
 		return exit;
+	}
+	
+	public static void resetExit() {
+		ExitBlock.exit = false;
 	}
 
 
