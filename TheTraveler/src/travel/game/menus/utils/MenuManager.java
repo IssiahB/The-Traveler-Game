@@ -1,9 +1,9 @@
 package travel.game.menus.utils;
 
+import travel.game.gfx.ImageHandler;
 import travel.game.menus.ChooseMenu;
 import travel.game.menus.MainMenu;
 import travel.game.menus.PauseMenu;
-import travel.game.util.ImageHandler;
 
 public class MenuManager {
 	

@@ -1,4 +1,4 @@
-package travel.game.util;
+package travel.game.gfx;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

@@ -6,8 +6,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 
-import travel.game.Loop;
-import travel.game.util.ImageHandler;
+import travel.game.gfx.ImageHandler;
 
 public class Player extends Entity {
 

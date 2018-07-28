@@ -8,11 +8,11 @@ import java.awt.image.BufferedImage;
 
 import travel.game.GameState;
 import travel.game.Loop;
+import travel.game.gfx.ImageHandler;
 import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;
 import travel.game.menus.utils.MenuTemplate;
 import travel.game.menus.utils.Menus;
-import travel.game.util.ImageHandler;
 import travel.game.worlds.WorldHandler;
 import travel.game.worlds.Worlds;;
 
@@ -45,12 +45,12 @@ public class PauseMenu extends MenuTemplate implements Menu {
 		else
 			if(inRect(x, y, restart) && released) {
 				restartColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.NOT);
-				Loop.setCurrentState(GameState.game);
+//				MenuManager.setCurrentMenu(Menus.NOT);
 				Worlds world = WorldHandler.getPickedWorld();
 				WorldHandler.clearWorld();
 				WorldHandler.loadWorld(world);
 				
+				Loop.setCurrentState(GameState.game);
 			}
 	}
 

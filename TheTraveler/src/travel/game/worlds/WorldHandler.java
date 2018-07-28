@@ -14,8 +14,8 @@ import travel.game.entity.ExitBlock;
 import travel.game.entity.Player;
 import travel.game.entity.slide.ISlidable;
 import travel.game.filemanagers.InputFile;
-import travel.game.phisics.Translation;
-import travel.game.util.ImageHandler;;
+import travel.game.gfx.ImageHandler;
+import travel.game.phisics.Translation;;
 
 public class WorldHandler {
 	

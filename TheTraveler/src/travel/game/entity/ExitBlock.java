@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-import travel.game.util.ImageHandler;
+import travel.game.gfx.ImageHandler;
 
 public class ExitBlock extends Entity{
 	

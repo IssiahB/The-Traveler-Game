@@ -5,7 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 import travel.game.entity.slide.ISlidable;
-import travel.game.util.ImageHandler;
+import travel.game.gfx.ImageHandler;
 
 public class Block extends Entity{
 	

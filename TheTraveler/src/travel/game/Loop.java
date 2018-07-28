@@ -9,6 +9,7 @@ import travel.game.entity.Player;
 import travel.game.gfx.Display;
 import travel.game.input.Keyboard;
 import travel.game.input.MouseClicker;
+import travel.game.menus.PauseMenu;
 import travel.game.menus.utils.MenuManager;
 import travel.game.menus.utils.Menus;
 import travel.game.worlds.WorldHandler;
@@ -104,7 +105,7 @@ public class Loop implements Runnable {
 			lastTime = now;
 			
 			if (delta >= 1) {
-				// every second update and render
+				// every second update and render 60 times
 				update();
 				render();
 				update++;
@@ -125,6 +126,9 @@ public class Loop implements Runnable {
 	}
 	
 	private void update() {
+		
+//		 update game only if 
+//		 in the game.
 		
 		if (currentState == GameState.game) {
 			keyboard.update();
@@ -162,11 +166,6 @@ public class Loop implements Runnable {
 		
 		boolean isGameState = (currentState == GameState.game) ? true
 				: false;
-		boolean isPauseState = (currentState == GameState.pause)
-				? true
-				: false;
-		boolean isMenuState = (currentState == GameState.menu) ? true
-				: false;
 		
 		if (isGameState) {
 			g.setColor(Color.black);
@@ -174,13 +173,7 @@ public class Loop implements Runnable {
 			
 			world.getTranslate().translate(world.getPlayer(), g);
 			world.getEntities().render(g);
-		}
-		
-		if (isPauseState) {
-			MenuManager.getCurrentMenu().render(g);
-		}
-		
-		if (isMenuState) {
+		} else {
 			MenuManager.getCurrentMenu().render(g);
 		}
 		
