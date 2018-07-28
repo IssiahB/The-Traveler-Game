@@ -22,10 +22,12 @@ public class PauseMenu extends MenuTemplate implements Menu {
 	
 	private Rectangle resume = new Rectangle((Loop.getWidth()/2-100), 100, 200, 50);
 	private Rectangle restart = new Rectangle((Loop.getWidth()/2-100), 200, 200, 50);
+	private Rectangle exit = new Rectangle((Loop.getWidth()/2-100), 300, 200, 50);
 	
 	
 	private Color resumeColor = Color.GRAY;
 	private Color restartColor = Color.GRAY;
+	private Color exitColor = Color.GRAY;
 
 	@Override
 	public void update(int x, int y, boolean pressed,
@@ -51,6 +53,17 @@ public class PauseMenu extends MenuTemplate implements Menu {
 				
 				Loop.setCurrentState(GameState.game);
 			}
+		
+		if(inRect(x, y, exit) && pressed)
+			exitColor = Color.GRAY.darker();
+		else
+			if(inRect(x, y, exit) && released) {
+				exitColor = Color.GRAY;
+				WorldHandler.clearWorld();
+				
+				MenuManager.setCurrentMenu(Menus.main);
+				Loop.setCurrentState(GameState.menu);
+			}
 	}
 
 	@Override
@@ -61,11 +74,13 @@ public class PauseMenu extends MenuTemplate implements Menu {
 		
 		drawButton(g2, resume, resumeColor);
 		drawButton(g2, restart, restartColor);
+		drawButton(g2, exit, exitColor);
 		
 		g.setFont(font);
 		g.setColor(Color.white);
 		g2.drawString("Resume", (resume.x + 30), (resume.y + 35));
 		g2.drawString("Restart", (restart.x + 25), (restart.y + 35));
+		g2.drawString("Exit", (exit.x + 55), (exit.y + 35));
 	}
 	
 }

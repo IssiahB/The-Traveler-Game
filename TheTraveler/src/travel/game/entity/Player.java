@@ -130,6 +130,10 @@ public class Player extends Entity {
 	public static int getStaticHeight() {
 		return staticHeight;
 	}
+	
+	public static void resetDead() {
+		Player.dead = false;
+	}
 
 	public static boolean isDead() {
 		return dead;

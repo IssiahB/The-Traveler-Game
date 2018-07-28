@@ -63,6 +63,7 @@ public class MainMenu extends MenuTemplate implements Menu {
 		} else 
 			if(inRect(x, y, exit) && released) {
 				exitColor = Color.GRAY;
+				System.exit(0);
 			}
 	}
 	

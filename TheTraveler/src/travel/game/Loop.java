@@ -10,6 +10,7 @@ import travel.game.gfx.Display;
 import travel.game.input.Keyboard;
 import travel.game.input.MouseClicker;
 import travel.game.menus.PauseMenu;
+import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;
 import travel.game.menus.utils.Menus;
 import travel.game.worlds.WorldHandler;
@@ -69,6 +70,9 @@ public class Loop implements Runnable {
 	}
 	
 	private void cleanUp() {
+		if(display.getFrame().isVisible())
+			display.getFrame().dispose();
+		
 		WorldHandler.clearWorld();
 		menu.cleanUp();
 	}
@@ -81,6 +85,7 @@ public class Loop implements Runnable {
 		keyboard = new Keyboard();
 		mouse = new MouseClicker(world);
 		display = new Display(title, width, height);
+		MenuManager.setCurrentMenu(Menus.main);
 		
 		display.getCanvas().addMouseListener(mouse);
 		display.getFrame().addKeyListener(keyboard);
