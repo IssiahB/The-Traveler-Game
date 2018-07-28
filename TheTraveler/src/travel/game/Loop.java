@@ -127,9 +127,6 @@ public class Loop implements Runnable {
 	
 	private void update() {
 		
-//		 update game only if 
-//		 in the game.
-		
 		if (currentState == GameState.game) {
 			keyboard.update();
 			world.getEntities().update();

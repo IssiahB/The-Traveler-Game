@@ -45,7 +45,6 @@ public class PauseMenu extends MenuTemplate implements Menu {
 		else
 			if(inRect(x, y, restart) && released) {
 				restartColor = Color.GRAY;
-//				MenuManager.setCurrentMenu(Menus.NOT);
 				Worlds world = WorldHandler.getPickedWorld();
 				WorldHandler.clearWorld();
 				WorldHandler.loadWorld(world);
