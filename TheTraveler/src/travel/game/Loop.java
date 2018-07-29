@@ -146,6 +146,7 @@ public class Loop implements Runnable {
 			if (Player.isDead()) {
 				MenuManager.setCurrentMenu(Menus.pause);
 				currentState = GameState.pause;
+				Player.resetDead();
 			}
 			
 			if (ExitBlock.isExit()) {

@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 
 import travel.game.GameState;
 import travel.game.Loop;
+import travel.game.entity.Player;
 import travel.game.gfx.ImageHandler;
 import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;
@@ -38,7 +39,6 @@ public class PauseMenu extends MenuTemplate implements Menu {
 		else 
 			if(inRect(x, y, resume) && released) {
 				resumeColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.NOT);
 				Loop.setCurrentState(GameState.game);
 			}
 		
@@ -61,7 +61,7 @@ public class PauseMenu extends MenuTemplate implements Menu {
 				exitColor = Color.GRAY;
 				WorldHandler.clearWorld();
 				
-				MenuManager.setCurrentMenu(Menus.main);
+				MenuManager.setCurrentMenu(Menus.choose);
 				Loop.setCurrentState(GameState.menu);
 			}
 	}
