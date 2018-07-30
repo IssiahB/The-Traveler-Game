@@ -44,7 +44,7 @@ public class WorldHandler {
 	}
 	
 	private static void getWorld(Worlds world) {
-		input.readFile("res/worlds/"+world.toString()+".lvl");
+		input.readFile("res/worlds/" + world.toString() + ".lvl");
 		pickWorldTexture(world);
 	}
 	
@@ -72,13 +72,17 @@ public class WorldHandler {
 	
 	private static void pickWorldTexture(Worlds world) {
 		switch (world) {
-			case world1:
+			case world3:
 				background = ImageHandler
-						.getImage("res/worlds/textures/world1.png");
-			case world2:
-				background = ImageHandler
-						.getImage("res/worlds/textures/world1.png");
+						.getImage("res/worlds/textures/Lava.png");
 				break;
+			case world6:
+				background = ImageHandler
+						.getImage("res/worlds/textures/Desert.png");
+				break;
+			default:
+				background = ImageHandler
+						.getImage("res/worlds/textures/world1.png");
 		}
 	}
 	
@@ -167,7 +171,7 @@ public class WorldHandler {
 	public Translation getTranslate() {
 		return translate;
 	}
-
+	
 	public static Worlds getPickedWorld() {
 		return pickedWorld;
 	}
