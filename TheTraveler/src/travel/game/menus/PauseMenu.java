@@ -34,6 +34,7 @@ public class PauseMenu extends MenuTemplate implements Menu {
 	public void update(int x, int y, boolean pressed,
 			boolean released) {
 		
+		// resume action
 		if(inRect(x, y, resume) && pressed) 
 			resumeColor = Color.GRAY.darker();
 		else 
@@ -42,6 +43,7 @@ public class PauseMenu extends MenuTemplate implements Menu {
 				Loop.setCurrentState(GameState.game);
 			}
 		
+		// restart action
 		if(inRect(x, y, restart) && pressed) 
 			restartColor = Color.GRAY.darker();
 		else
@@ -54,6 +56,7 @@ public class PauseMenu extends MenuTemplate implements Menu {
 				Loop.setCurrentState(GameState.game);
 			}
 		
+		// exit action
 		if(inRect(x, y, exit) && pressed)
 			exitColor = Color.GRAY.darker();
 		else
@@ -61,7 +64,7 @@ public class PauseMenu extends MenuTemplate implements Menu {
 				exitColor = Color.GRAY;
 				WorldHandler.clearWorld();
 				
-				MenuManager.setCurrentMenu(Menus.choose);
+				MenuManager.setCurrentMenu(Menus.main);
 				Loop.setCurrentState(GameState.menu);
 			}
 	}

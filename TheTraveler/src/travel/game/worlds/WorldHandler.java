@@ -43,17 +43,23 @@ public class WorldHandler {
 		this.loop = loop;
 	}
 	
-	private static void getWorld(Worlds world) {
-		input.readFile("res/worlds/" + world.toString() + ".lvl");
-		pickWorldTexture(world);
-	}
-	
 	public static void loadWorld(Worlds world) {
 		clearWorld();
 		
 		pickedWorld = world;
 		
-		getWorld(world);
+		switch(world) {
+			case create1:
+				input.readFile("res/worlds/create/create1.lvl"); break;
+			case create2:
+				input.readFile("res/worlds/create/create2.lvl"); break;
+			case create3:
+				input.readFile("res/worlds/create/create3.lvl"); break;
+			default:
+				input.readFile("res/worlds/" + world.toString() + ".lvl");
+		}
+		
+		pickWorldTexture(world);
 		
 		sizeOfWorld = new Dimension(input.getWidth(),
 				input.getHeight());

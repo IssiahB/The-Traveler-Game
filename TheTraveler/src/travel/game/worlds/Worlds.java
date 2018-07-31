@@ -10,5 +10,8 @@ public enum Worlds {
 	world7,
 	world8,
 	world9,
-	world10;
+	world10,
+	create1,
+	create2,
+	create3;
 }

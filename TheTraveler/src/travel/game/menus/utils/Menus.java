@@ -4,6 +4,7 @@ public enum Menus {
 	main,
 	choose,
 	create,
+	options,
 	setting,
 	pause,
 	NOT;

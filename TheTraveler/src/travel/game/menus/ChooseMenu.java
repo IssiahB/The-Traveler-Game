@@ -70,7 +70,6 @@ public class ChooseMenu extends MenuTemplate implements Menu {
 			if (released && inRect(x, y, levels.get(i))) {
 				colors.remove(i);
 				colors.add(i, Color.gray);
-				WorldHandler.clearWorld();
 				WorldHandler.loadWorld(levelNames.get(i));
 				Loop.setCurrentState(GameState.game);
 			}
