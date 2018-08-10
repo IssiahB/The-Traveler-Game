@@ -8,7 +8,6 @@ import java.awt.image.BufferedImage;
 
 import travel.game.GameState;
 import travel.game.Loop;
-import travel.game.entity.Player;
 import travel.game.gfx.ImageHandler;
 import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;

@@ -14,11 +14,24 @@ public abstract class MenuTemplate {
 		g2.fill(rect);
 	}
 	
-	protected boolean inRect(int x, int y, Rectangle rect) {
-		y = y + 25;
+	protected boolean inRect(int mouseX, int mouseY, int posX,
+			int posY, int width, int height) {
+		mouseY = mouseY + 25;
 		
-		if(x > rect.getX() && x < (rect.getX() + rect.getWidth())) {
-			if(y > rect.getY() && y < (rect.getY() + rect.getHeight())) {
+		if(mouseX > posX && mouseX < (posX + width)) {
+			if(mouseY > posY && mouseY < (posY + height)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	protected boolean inRect(int mouseX, int mouseY, Rectangle rect) {
+		mouseY = mouseY + 25;
+		
+		if(mouseX > rect.getX() && mouseX < (rect.getX() + rect.getWidth())) {
+			if(mouseY > rect.getY() && mouseY < (rect.getY() + rect.getHeight())) {
 				return true;
 			}
 		}

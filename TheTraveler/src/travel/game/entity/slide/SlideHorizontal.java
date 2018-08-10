@@ -34,11 +34,21 @@ public class SlideHorizontal implements ISlidable {
 			down = false;
 		}
 	}
-
+	
 	public ISlidable setHorizontalDistanceAndSpeed(int distance, int speed) {
 		this.distance = distance;
 		this.speed = speed;
 		return this;
+	}
+	
+	@Override
+	public int getDistance() {
+		return distance;
+	}
+	
+	@Override
+	public int getSpeed() {
+		return speed;
 	}
 
 }

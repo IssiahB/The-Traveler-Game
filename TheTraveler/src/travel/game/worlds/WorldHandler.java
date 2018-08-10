@@ -11,6 +11,7 @@ import travel.game.entity.Block;
 import travel.game.entity.Enemy;
 import travel.game.entity.EntityHandler;
 import travel.game.entity.ExitBlock;
+import travel.game.entity.LavaBlock;
 import travel.game.entity.Player;
 import travel.game.entity.slide.ISlidable;
 import travel.game.filemanagers.InputFile;
@@ -31,7 +32,9 @@ public class WorldHandler {
 	private static BufferedImage background = null;
 	
 	private static List<Point> blockPosition = null;
+	private static List<Point> lavaPosition = null;
 	private static List<ISlidable> blockSlidable = null;
+	private static List<ISlidable> lavaSlidable = null;
 	private static List<Point> enemyPosition = null;
 	private static Dimension sizeOfWorld = null;
 	private static Point playerXY = null;
@@ -61,17 +64,22 @@ public class WorldHandler {
 		
 		pickWorldTexture(world);
 		
+		
+		
 		sizeOfWorld = new Dimension(input.getWidth(),
 				input.getHeight());
 		playerXY = new Point(input.getX(), input.getY());
 		exitXY = input.getExit();
 		blockPosition = input.getBlockPosition();
+		lavaPosition = input.getLavaPosition();
 		blockSlidable = input.getBlockSlidables();
+		lavaSlidable = input.getLavaSlidables();
 		enemyPosition = input.getEnemyPosition();
 		
 		addBackground();
 		addExit();
 		addBlocks();
+		addLava();
 		addPlayer();
 		addEnemies();
 	}
@@ -85,6 +93,10 @@ public class WorldHandler {
 			case world6:
 				background = ImageHandler
 						.getImage("res/worlds/textures/Desert.png");
+				break;
+			case world7:
+				background = ImageHandler
+					.getImage("res/worlds/textures/Forest.png");
 				break;
 			default:
 				background = ImageHandler
@@ -124,13 +136,23 @@ public class WorldHandler {
 		}
 	}
 	
+	private static void addLava() {
+		for (int i = 0; i < lavaPosition.size(); i++) {
+			entities.addEntity(new LavaBlock(lavaSlidable.get(i),
+					(int) lavaPosition.get(i).getX(),
+					(int) lavaPosition.get(i).getY(), 50, 50));
+		}
+	}
+	
 	public static void clearWorld() {
 		entities.cleanUp();
 		input.cleanUp();
 		background = null;
+		lavaPosition = null;
 		enemyPosition = null;
 		blockPosition = null;
 		blockSlidable = null;
+		lavaSlidable = null;
 		sizeOfWorld = null;
 		playerXY = null;
 		exitXY = null;

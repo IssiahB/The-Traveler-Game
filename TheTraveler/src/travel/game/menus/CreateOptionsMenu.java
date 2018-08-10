@@ -5,6 +5,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+import javax.swing.JOptionPane;
 
 import travel.game.GameState;
 import travel.game.Loop;
@@ -34,10 +39,13 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 	}
 	
 	private String getTitle() {
-		switch(currentWorld) {
-			case create1: return "World 1";
-			case create2: return "World 2";
-			case create3: return "World 3";
+		switch (currentWorld) {
+			case create1:
+				return "World 1";
+			case create2:
+				return "World 2";
+			case create3:
+				return "World 3";
 			default:
 				return "Unknown World";
 		}
@@ -48,41 +56,45 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 			boolean released) {
 		
 		// back actions
-		if(inRect(x, y, back) && pressed)
+		if (inRect(x, y, back) && pressed)
 			backColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, back) && released) {
-				backColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.create);
-			}
+		else if (inRect(x, y, back) && released) {
+			backColor = Color.GRAY;
+			MenuManager.setCurrentMenu(Menus.create);
+		}
 		
 		// edit actions
-		if(inRect(x, y, edit) && pressed)
+		if (inRect(x, y, edit) && pressed)
 			editColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, edit) && released) {
-				editColor = Color.GRAY;
-				
-			}
+		else if (inRect(x, y, edit) && released) {
+			editColor = Color.GRAY;
+			int width = getWidth();
+			int height = getHeight();
+			
+			if(width == -1 || height == -1)
+				return;
+			
+			CreatorMenu.passWidthHeight(width, height);
+			MenuManager.setCurrentMenu(Menus.creator);
+		}
 		
 		// play actions
-		if(inRect(x, y, play) && pressed)
+		if (inRect(x, y, play) && pressed)
 			playColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, play) && released) {
-				playColor = Color.GRAY;
-				WorldHandler.loadWorld(currentWorld);
-				Loop.setCurrentState(GameState.game);
-			}
+		else if (inRect(x, y, play) && released) {
+			playColor = Color.GRAY;
+			WorldHandler.loadWorld(currentWorld);
+			Loop.setCurrentState(GameState.game);
+		}
 		
 		// reset actions
-		if(inRect(x, y, reset) && pressed)
+		if (inRect(x, y, reset) && pressed)
 			resetColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, reset) && released) {
-				resetColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.create);
-			}
+		else if (inRect(x, y, reset) && released) {
+			resetColor = Color.GRAY;
+			resetWorld();
+			MenuManager.setCurrentMenu(Menus.create);
+		}
 	}
 	
 	@Override
@@ -102,7 +114,8 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 		g2.setFont(new Font("Arial Bold", 30, 30));
 		g2.drawString("Edit", (edit.x + 65), (edit.y + 35));
 		g2.drawString("Play", (play.x + 65), (play.y + 35));
-		g2.drawString("Restore Default", (reset.x + 10), (reset.y + 35));
+		g2.drawString("Restore Default", (reset.x + 10),
+				(reset.y + 35));
 		
 		// Title
 		g2.setFont(new Font("Arial Bold", 80, 80));
@@ -113,6 +126,75 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 		g2.setFont(new Font("Arial Bold", 20, 20));
 		g2.setColor(Color.white);
 		g2.drawString("Back", (back.x + 30), (back.y + 25));
+	}
+	
+	private void resetWorld() {
+		PrintWriter out = null;
+		
+		try {
+			out = new PrintWriter(new File(
+					"res/worlds/create/" + currentWorld + ".lvl"));
+			
+			out.println("900 900");
+			out.println("500 500");
+			out.println("0 0");
+			out.println("-1 \n-1 \n-1");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+	}
+	
+	private static int getWidth() {
+		int width = 0;
+		String stringWidth = JOptionPane.showInputDialog(null,
+				"Enter Width", "Width", JOptionPane.QUESTION_MESSAGE);
+		
+		if(stringWidth == null)
+			return -1;
+		
+		try {
+			width = Integer.parseInt(stringWidth);
+			if(width > 1500) 
+				throw new IndexOutOfBoundsException("value too high");
+			
+			if(width < 100) 
+				throw new IndexOutOfBoundsException("value too low");
+			
+		} catch (Exception e) {
+			System.err.println("Wrong Value");
+			e.printStackTrace();
+			return getWidth();
+		}
+		
+		return width;
+	}
+	
+	private static int getHeight() {
+		int height = 0;
+		String stringHeight = JOptionPane.showInputDialog(null,
+				"Enter Height", "Height",
+				JOptionPane.QUESTION_MESSAGE);
+		
+		if(stringHeight == null) 
+			return -1;
+		
+		try {
+			height = Integer.parseInt(stringHeight);
+			if(height > 1500) 
+				throw new IndexOutOfBoundsException("Value too high");
+			
+			if(height < 100) 
+				throw new IndexOutOfBoundsException("value too low");
+			
+		} catch (Exception e) {
+			System.err.println("Wrong Value");
+			e.printStackTrace();
+			return getHeight();
+		}
+		
+		return height;
 	}
 	
 }

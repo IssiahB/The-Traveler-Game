@@ -4,6 +4,7 @@ import travel.game.gfx.ImageHandler;
 import travel.game.menus.ChooseMenu;
 import travel.game.menus.CreateMenu;
 import travel.game.menus.CreateOptionsMenu;
+import travel.game.menus.CreatorMenu;
 import travel.game.menus.MainMenu;
 import travel.game.menus.PauseMenu;
 import travel.game.menus.SettingMenu;
@@ -20,6 +21,7 @@ public class MenuManager {
 	private static CreateMenu create = new CreateMenu();
 	private static PauseMenu pause = new PauseMenu();
 	private static CreateOptionsMenu option = new CreateOptionsMenu();
+	private static CreatorMenu creator = new CreatorMenu();
 	
 	private static Menu currentMenu = main;
 	
@@ -48,8 +50,8 @@ public class MenuManager {
 			case options:
 				currentMenu = option;
 				break;
-			case NOT:
-				currentMenu = null;
+			case creator:
+				currentMenu = creator;
 				break;
 			default:
 				currentMenu = main;

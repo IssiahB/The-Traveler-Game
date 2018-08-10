@@ -9,8 +9,6 @@ import travel.game.entity.Player;
 import travel.game.gfx.Display;
 import travel.game.input.Keyboard;
 import travel.game.input.MouseClicker;
-import travel.game.menus.PauseMenu;
-import travel.game.menus.utils.Menu;
 import travel.game.menus.utils.MenuManager;
 import travel.game.menus.utils.Menus;
 import travel.game.worlds.WorldHandler;

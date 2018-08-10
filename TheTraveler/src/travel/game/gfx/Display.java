@@ -3,7 +3,6 @@ package travel.game.gfx;
 import java.awt.Canvas;
 import java.awt.Dimension;
 
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 public class Display {

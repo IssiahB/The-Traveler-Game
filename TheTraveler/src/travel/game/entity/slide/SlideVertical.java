@@ -40,5 +40,13 @@ public class SlideVertical implements ISlidable {
 		this.speed = speed;
 		return this;
 	}
+	
+	public int getDistance() {
+		return distance;
+	}
+	
+	public int getSpeed() {
+		return speed;
+	}
 
 }

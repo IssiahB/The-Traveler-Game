@@ -15,6 +15,8 @@ public class InputFile {
 	
 	private int width, height;
 	private List<Point> blockPosition = new ArrayList<Point>();
+	private List<Point> lavaPosition = new ArrayList<Point>();
+	private List<ISlidable> lavaSlidables = new ArrayList<ISlidable>();
 	private List<ISlidable> blockSlidables = new ArrayList<ISlidable>();
 	private List<Point> enemyPosition = new ArrayList<Point>();
 	private int x, y;
@@ -74,6 +76,36 @@ public class InputFile {
 									speed));
 				}
 			}
+			
+			// gets Lava 
+			while ((tempX = s.nextInt()) != -1) {
+				tempY = s.nextInt();
+				type = s.next();
+				
+				if (type.equals("n")) {
+					lavaPosition.add(new Point(tempX, tempY));
+					lavaSlidables.add(new SlideNone());
+				}
+				
+				if (type.equals("v")) {
+					int distance = s.nextInt();
+					int speed = s.nextInt();
+					lavaPosition.add(new Point(tempX, tempY));
+					lavaSlidables.add(new SlideVertical()
+							.setVerticalDistanceAndSpeed(distance,
+									speed));
+				}
+				
+				if (type.equals("h")) {
+					int distance = s.nextInt();
+					int speed = s.nextInt();
+					lavaPosition.add(new Point(tempX, tempY));
+					lavaSlidables.add(new SlideHorizontal()
+							.setHorizontalDistanceAndSpeed(distance,
+									speed));
+				}
+			}
+			
 		} catch (Exception e) {
 			System.err.println(path + " could not be found");
 			e.printStackTrace();
@@ -90,6 +122,8 @@ public class InputFile {
 		blockPosition.clear();
 		enemyPosition.clear();
 		blockSlidables.clear();
+		lavaPosition.clear();
+		lavaSlidables.clear();
 	}
 	
 	public int getWidth() {
@@ -154,5 +188,21 @@ public class InputFile {
 	
 	public void setBlockSlidables(List<ISlidable> blockSlidables) {
 		this.blockSlidables = blockSlidables;
+	}
+
+	public List<Point> getLavaPosition() {
+		return lavaPosition;
+	}
+
+	public void setLavaPosition(List<Point> lavaPosition) {
+		this.lavaPosition = lavaPosition;
+	}
+
+	public List<ISlidable> getLavaSlidables() {
+		return lavaSlidables;
+	}
+
+	public void setLavaSlidables(List<ISlidable> lavaSlidables) {
+		this.lavaSlidables = lavaSlidables;
 	}
 }

@@ -1,61 +1,47 @@
 package travel.test;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFrame;
+import travel.game.entity.slide.ISlidable;
+import travel.game.entity.slide.SlideHorizontal;
+import travel.game.entity.slide.SlideNone;
+import travel.game.entity.slide.SlideVertical;
+import travel.game.filemanagers.OutputFile;
 
-public class Test implements MouseListener{
-	
-	public Test() {
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(true);
-		frame.addMouseListener(this);
-		frame.setSize(700, 500);
-		frame.setLocationRelativeTo(null);
-		frame.setVisible(true);
-	}
-	
+public class Test{
 	
 	public static void main(String[] args) {
-		new Test();
-	}
-
-
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		System.out.println("Clicked");
 		
-	}
-
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		List<Point> enemyPos = createPointList();
+		List<Point> blockPos = createPointList();
+		List<Point> lavaPos = createPointList();
+		List<ISlidable> blockSlidables = createSlidableList();
+		List<ISlidable> lavaSlidables = createSlidableList();
 		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		OutputFile.setUp(500, 500, 50, 50, 450, 450, enemyPos, blockPos, blockSlidables, lavaPos, lavaSlidables);
+		//OutputFile.writeFile("C:/GitHub/TheTraveler/TheTraveler/src/travel/test/Writable.txt");
 	}
 
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+	private static List<Point> createPointList() {
+		List<Point> list = new ArrayList<Point>();
 		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		list.add(new Point(200, 200));
+		list.add(new Point(400, 400));
+		list.add(new Point(100, 100));
 		
+		return list;
 	}
-
 	
+	private static List<ISlidable> createSlidableList() {
+		List<ISlidable> list = new ArrayList<ISlidable>();
+		
+		list.add(new SlideHorizontal().setHorizontalDistanceAndSpeed(100, 2));
+		list.add(new SlideVertical().setVerticalDistanceAndSpeed(50, 1));
+		list.add(new SlideNone());
+		
+		return list;
+	}
 }
