@@ -26,7 +26,6 @@ public class WorldHandler {
 	private Loop loop;
 	
 	private static EntityHandler entities = new EntityHandler();
-	private static InputFile input = new InputFile();
 	private Translation translate = new Translation();
 	
 	private static BufferedImage background = null;
@@ -53,28 +52,28 @@ public class WorldHandler {
 		
 		switch(world) {
 			case create1:
-				input.readFile("res/worlds/create/create1.lvl"); break;
+				InputFile.readFile("res/worlds/create/create1.lvl"); break;
 			case create2:
-				input.readFile("res/worlds/create/create2.lvl"); break;
+				InputFile.readFile("res/worlds/create/create2.lvl"); break;
 			case create3:
-				input.readFile("res/worlds/create/create3.lvl"); break;
+				InputFile.readFile("res/worlds/create/create3.lvl"); break;
 			default:
-				input.readFile("res/worlds/" + world.toString() + ".lvl");
+				InputFile.readFile("res/worlds/" + world.toString() + ".lvl");
 		}
 		
 		pickWorldTexture(world);
 		
 		
 		
-		sizeOfWorld = new Dimension(input.getWidth(),
-				input.getHeight());
-		playerXY = new Point(input.getX(), input.getY());
-		exitXY = input.getExit();
-		blockPosition = input.getBlockPosition();
-		lavaPosition = input.getLavaPosition();
-		blockSlidable = input.getBlockSlidables();
-		lavaSlidable = input.getLavaSlidables();
-		enemyPosition = input.getEnemyPosition();
+		sizeOfWorld = new Dimension(InputFile.getWidth(),
+				InputFile.getHeight());
+		playerXY = new Point(InputFile.getX(), InputFile.getY());
+		exitXY = InputFile.getExit();
+		blockPosition = InputFile.getBlockPosition();
+		lavaPosition = InputFile.getLavaPosition();
+		blockSlidable = InputFile.getBlockSlidables();
+		lavaSlidable = InputFile.getLavaSlidables();
+		enemyPosition = InputFile.getEnemyPosition();
 		
 		addBackground();
 		addExit();
@@ -146,7 +145,7 @@ public class WorldHandler {
 	
 	public static void clearWorld() {
 		entities.cleanUp();
-		input.cleanUp();
+		InputFile.cleanUp();
 		background = null;
 		lavaPosition = null;
 		enemyPosition = null;

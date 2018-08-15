@@ -13,16 +13,16 @@ import travel.game.entity.slide.SlideVertical;
 
 public class InputFile {
 	
-	private int width, height;
-	private List<Point> blockPosition = new ArrayList<Point>();
-	private List<Point> lavaPosition = new ArrayList<Point>();
-	private List<ISlidable> lavaSlidables = new ArrayList<ISlidable>();
-	private List<ISlidable> blockSlidables = new ArrayList<ISlidable>();
-	private List<Point> enemyPosition = new ArrayList<Point>();
-	private int x, y;
-	private Point exit;
+	private static int width, height;
+	private static List<Point> blockPosition = new ArrayList<Point>();
+	private static List<Point> lavaPosition = new ArrayList<Point>();
+	private static List<ISlidable> lavaSlidables = new ArrayList<ISlidable>();
+	private static List<ISlidable> blockSlidables = new ArrayList<ISlidable>();
+	private static List<Point> enemyPosition = new ArrayList<Point>();
+	private static int x, y;
+	private static Point exit;
 	
-	public void readFile(String path) {
+	public static void readFile(String path) {
 		Scanner s = null;
 		
 		try {
@@ -44,6 +44,7 @@ public class InputFile {
 			// gets enemy
 			while ((tempX = s.nextInt()) != -1) {
 				tempY = s.nextInt();
+				System.out.println("Reading");
 				enemyPosition.add(new Point(tempX, tempY));
 			}
 			
@@ -113,7 +114,7 @@ public class InputFile {
 		}
 	}
 	
-	public void cleanUp() {
+	public static void cleanUp() {
 		x = 0;
 		y = 0;
 		width = 0;
@@ -125,84 +126,46 @@ public class InputFile {
 		lavaPosition.clear();
 		lavaSlidables.clear();
 	}
-	
-	public int getWidth() {
+
+	public static int getWidth() {
 		return width;
 	}
-	
-	public void setWidth(int width) {
-		this.width = width;
-	}
-	
-	public int getHeight() {
+
+	public static int getHeight() {
 		return height;
 	}
-	
-	public void setHeight(int height) {
-		this.height = height;
-	}
-	
-	public int getX() {
-		return x;
-	}
-	
-	public void setX(int x) {
-		this.x = x;
-	}
-	
-	public int getY() {
-		return y;
-	}
-	
-	public void setY(int y) {
-		this.y = y;
-	}
-	
-	public Point getExit() {
-		return exit;
-	}
-	
-	public void setExit(Point exit) {
-		this.exit = exit;
-	}
-	
-	public List<Point> getEnemyPosition() {
-		return enemyPosition;
-	}
-	
-	public void setEnemyPosition(List<Point> enemyPosition) {
-		this.enemyPosition = enemyPosition;
-	}
-	
-	public List<Point> getBlockPosition() {
+
+	public static List<Point> getBlockPosition() {
 		return blockPosition;
 	}
-	
-	public void setBlockPosition(List<Point> blockPosition) {
-		this.blockPosition = blockPosition;
-	}
-	
-	public List<ISlidable> getBlockSlidables() {
-		return blockSlidables;
-	}
-	
-	public void setBlockSlidables(List<ISlidable> blockSlidables) {
-		this.blockSlidables = blockSlidables;
-	}
 
-	public List<Point> getLavaPosition() {
+	public static List<Point> getLavaPosition() {
 		return lavaPosition;
 	}
 
-	public void setLavaPosition(List<Point> lavaPosition) {
-		this.lavaPosition = lavaPosition;
-	}
-
-	public List<ISlidable> getLavaSlidables() {
+	public static List<ISlidable> getLavaSlidables() {
 		return lavaSlidables;
 	}
 
-	public void setLavaSlidables(List<ISlidable> lavaSlidables) {
-		this.lavaSlidables = lavaSlidables;
+	public static List<ISlidable> getBlockSlidables() {
+		return blockSlidables;
 	}
+
+	public static List<Point> getEnemyPosition() {
+		return enemyPosition;
+	}
+
+	public static int getX() {
+		return x;
+	}
+
+	public static int getY() {
+		return y;
+	}
+
+	public static Point getExit() {
+		return exit;
+	}
+	
+	
 }
