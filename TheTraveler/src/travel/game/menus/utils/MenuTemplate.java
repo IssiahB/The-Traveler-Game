@@ -9,7 +9,8 @@ public abstract class MenuTemplate {
 	
 	protected Font font = new Font("TimesNewRoman", 3, 40);
 	
-	protected void drawButton(Graphics2D g2, Rectangle rect, Color color) {
+	protected void drawButton(Graphics2D g2, Rectangle rect,
+			Color color) {
 		g2.setColor(color);
 		g2.fill(rect);
 	}
@@ -18,8 +19,8 @@ public abstract class MenuTemplate {
 			int posY, int width, int height) {
 		mouseY = mouseY + 25;
 		
-		if(mouseX > posX && mouseX < (posX + width)) {
-			if(mouseY > posY && mouseY < (posY + height)) {
+		if (mouseX > posX && mouseX < (posX + width)) {
+			if (mouseY > posY && mouseY < (posY + height)) {
 				return true;
 			}
 		}
@@ -30,8 +31,10 @@ public abstract class MenuTemplate {
 	protected boolean inRect(int mouseX, int mouseY, Rectangle rect) {
 		mouseY = mouseY + 25;
 		
-		if(mouseX > rect.getX() && mouseX < (rect.getX() + rect.getWidth())) {
-			if(mouseY > rect.getY() && mouseY < (rect.getY() + rect.getHeight())) {
+		if (mouseX > rect.getX()
+				&& mouseX < (rect.getX() + rect.getWidth())) {
+			if (mouseY > rect.getY()
+					&& mouseY < (rect.getY() + rect.getHeight())) {
 				return true;
 			}
 		}

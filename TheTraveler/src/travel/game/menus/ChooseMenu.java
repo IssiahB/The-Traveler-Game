@@ -53,13 +53,12 @@ public class ChooseMenu extends MenuTemplate implements Menu {
 	public void update(int x, int y, boolean pressed,
 			boolean released) {
 		
-		if(inRect(x, y, back) && pressed)
+		if (inRect(x, y, back) && pressed)
 			backColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, back) && released) {
-				backColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.main);
-			}
+		else if (inRect(x, y, back) && released) {
+			backColor = Color.GRAY;
+			MenuManager.setCurrentMenu(Menus.main);
+		}
 		
 		for (int i = 0; i < levels.size(); i++) {
 			if (pressed && inRect(x, y, levels.get(i))) {
@@ -94,16 +93,17 @@ public class ChooseMenu extends MenuTemplate implements Menu {
 			g2.setColor(Color.white);
 			
 			// realigns the letters if length is bigger
-			if(levelNames.get(i).toString().length() == 6) {
+			if (levelNames.get(i).toString().length() == 6) {
 				g2.drawString(levelNames.get(i).toString(),
-						((levels.get(i).x + levels.get(i).width / 2) - 30),
+						((levels.get(i).x + levels.get(i).width / 2)
+								- 30),
 						(levels.get(i).y + levels.get(i).height / 2));
-			} else
-				if(levelNames.get(i).toString().length() == 7) {
-					g2.drawString(levelNames.get(i).toString(),
-							((levels.get(i).x + levels.get(i).width / 2) - 35),
-							(levels.get(i).y + levels.get(i).height / 2));
-				}
+			} else if (levelNames.get(i).toString().length() == 7) {
+				g2.drawString(levelNames.get(i).toString(),
+						((levels.get(i).x + levels.get(i).width / 2)
+								- 35),
+						(levels.get(i).y + levels.get(i).height / 2));
+			}
 		}
 		
 		g2.drawString("Back", (back.x + 30), (back.y + 25));

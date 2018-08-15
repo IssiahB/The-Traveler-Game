@@ -50,20 +50,22 @@ public class WorldHandler {
 		
 		pickedWorld = world;
 		
-		switch(world) {
+		switch (world) {
 			case create1:
-				InputFile.readFile("res/worlds/create/create1.lvl"); break;
+				InputFile.readFile("res/worlds/create/create1.lvl");
+				break;
 			case create2:
-				InputFile.readFile("res/worlds/create/create2.lvl"); break;
+				InputFile.readFile("res/worlds/create/create2.lvl");
+				break;
 			case create3:
-				InputFile.readFile("res/worlds/create/create3.lvl"); break;
+				InputFile.readFile("res/worlds/create/create3.lvl");
+				break;
 			default:
-				InputFile.readFile("res/worlds/" + world.toString() + ".lvl");
+				InputFile.readFile(
+						"res/worlds/" + world.toString() + ".lvl");
 		}
 		
 		pickWorldTexture(world);
-		
-		
 		
 		sizeOfWorld = new Dimension(InputFile.getWidth(),
 				InputFile.getHeight());
@@ -95,7 +97,7 @@ public class WorldHandler {
 				break;
 			case world7:
 				background = ImageHandler
-					.getImage("res/worlds/textures/Forest.png");
+						.getImage("res/worlds/textures/Forest.png");
 				break;
 			default:
 				background = ImageHandler

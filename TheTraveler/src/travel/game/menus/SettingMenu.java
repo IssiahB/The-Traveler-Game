@@ -21,13 +21,12 @@ public class SettingMenu extends MenuTemplate implements Menu {
 	public void update(int x, int y, boolean pressed,
 			boolean released) {
 		
-		if(inRect(x, y, back) && pressed)
+		if (inRect(x, y, back) && pressed)
 			backColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, back) && released) {
-				backColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.main);
-			}
+		else if (inRect(x, y, back) && released) {
+			backColor = Color.GRAY;
+			MenuManager.setCurrentMenu(Menus.main);
+		}
 	}
 	
 	@Override

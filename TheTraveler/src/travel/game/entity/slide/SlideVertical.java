@@ -11,31 +11,34 @@ public class SlideVertical implements ISlidable {
 	private boolean down = false;
 	
 	private byte firstCall = 0;
-
+	
 	@Override
 	public void slide(Entity entity) {
-		if(firstCall == 0) {
+		if (firstCall == 0) {
 			farUpPosition = (entity.getY() - distance);
-			farDownPosition = ((entity.getY() + entity.getHeight()) + distance);
+			farDownPosition = ((entity.getY() + entity.getHeight())
+					+ distance);
 			firstCall++;
 		}
 		
-		if(entity.getY() > farUpPosition && up == true) {
+		if (entity.getY() > farUpPosition && up == true) {
 			entity.setY(entity.getY() - speed);
 		} else {
 			up = false;
 			down = true;
 		}
 		
-		if((entity.getY() + entity.getHeight()) < farDownPosition && down == true) {
+		if ((entity.getY() + entity.getHeight()) < farDownPosition
+				&& down == true) {
 			entity.setY(entity.getY() + speed);
 		} else {
 			up = true;
 			down = false;
 		}
 	}
-
-	public ISlidable setVerticalDistanceAndSpeed(int distance, int speed) {
+	
+	public ISlidable setVerticalDistanceAndSpeed(int distance,
+			int speed) {
 		this.distance = distance;
 		this.speed = speed;
 		return this;
@@ -48,5 +51,5 @@ public class SlideVertical implements ISlidable {
 	public int getSpeed() {
 		return speed;
 	}
-
+	
 }

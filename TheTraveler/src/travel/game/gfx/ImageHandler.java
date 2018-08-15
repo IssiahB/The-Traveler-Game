@@ -11,8 +11,8 @@ public class ImageHandler {
 		BufferedImage temp = null;
 		try {
 			temp = ImageIO.read(new File(path));
-		}catch (Exception e) {
-			System.err.println(path+" could not be read");
+		} catch (Exception e) {
+			System.err.println(path + " could not be read");
 			e.printStackTrace();
 			return null;
 		}

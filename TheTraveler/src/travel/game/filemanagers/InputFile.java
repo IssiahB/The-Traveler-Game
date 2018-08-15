@@ -78,7 +78,7 @@ public class InputFile {
 				}
 			}
 			
-			// gets Lava 
+			// gets Lava
 			while ((tempX = s.nextInt()) != -1) {
 				tempY = s.nextInt();
 				type = s.next();
@@ -126,46 +126,45 @@ public class InputFile {
 		lavaPosition.clear();
 		lavaSlidables.clear();
 	}
-
+	
 	public static int getWidth() {
 		return width;
 	}
-
+	
 	public static int getHeight() {
 		return height;
 	}
-
+	
 	public static List<Point> getBlockPosition() {
 		return blockPosition;
 	}
-
+	
 	public static List<Point> getLavaPosition() {
 		return lavaPosition;
 	}
-
+	
 	public static List<ISlidable> getLavaSlidables() {
 		return lavaSlidables;
 	}
-
+	
 	public static List<ISlidable> getBlockSlidables() {
 		return blockSlidables;
 	}
-
+	
 	public static List<Point> getEnemyPosition() {
 		return enemyPosition;
 	}
-
+	
 	public static int getX() {
 		return x;
 	}
-
+	
 	public static int getY() {
 		return y;
 	}
-
+	
 	public static Point getExit() {
 		return exit;
 	}
-	
 	
 }

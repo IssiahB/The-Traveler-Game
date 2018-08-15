@@ -69,13 +69,17 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 			editColor = Color.GRAY.darker();
 		else if (inRect(x, y, edit) && released) {
 			editColor = Color.GRAY;
-			InputFile.readFile("res/worlds/create/"+currentWorld+".lvl");
-			if(InputFile.getWidth() == 900) {
+			InputFile.readFile(
+					"res/worlds/create/" + currentWorld + ".lvl");
+			if (InputFile.getWidth() == 900) {
 				InputFile.cleanUp();
 				newWorld();
 			} else {
-				int restart = JOptionPane.showConfirmDialog(null, "Restart World?", "Restart", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-				if(restart == 0) {
+				int restart = JOptionPane.showConfirmDialog(null,
+						"Restart World?", "Restart",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE);
+				if (restart == 0) {
 					InputFile.cleanUp();
 					newWorld();
 				} else {
@@ -156,11 +160,11 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 	
 	private void newWorld() {
 		int width = getWidth();
-		if(width == -1)
+		if (width == -1)
 			return;
 		
 		int height = getHeight();
-		if(height == -1)
+		if (height == -1)
 			return;
 		
 		CreatorMenu.passValuesOfNewWorld(width, height, currentWorld);
@@ -170,17 +174,18 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 	private int getWidth() {
 		int width = 0;
 		String stringWidth = JOptionPane.showInputDialog(null,
-				"Enter Width | (MAX = 700)", "Width", JOptionPane.QUESTION_MESSAGE);
+				"Enter Width | (MAX = 700)", "Width",
+				JOptionPane.QUESTION_MESSAGE);
 		
-		if(stringWidth == null)
+		if (stringWidth == null)
 			return -1;
 		
 		try {
 			width = Integer.parseInt(stringWidth);
-			if(width > 700) 
+			if (width > 700)
 				throw new IndexOutOfBoundsException("value too high");
 			
-			if(width < 100) 
+			if (width < 100)
 				throw new IndexOutOfBoundsException("value too low");
 			
 		} catch (Exception e) {
@@ -198,15 +203,15 @@ public class CreateOptionsMenu extends MenuTemplate implements Menu {
 				"Enter Height | (MAX = 500)", "Height",
 				JOptionPane.QUESTION_MESSAGE);
 		
-		if(stringHeight == null) 
+		if (stringHeight == null)
 			return -1;
 		
 		try {
 			height = Integer.parseInt(stringHeight);
-			if(height > 500) 
+			if (height > 500)
 				throw new IndexOutOfBoundsException("Value too high");
 			
-			if(height < 100) 
+			if (height < 100)
 				throw new IndexOutOfBoundsException("value too low");
 			
 		} catch (Exception e) {

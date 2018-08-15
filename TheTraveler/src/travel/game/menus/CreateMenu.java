@@ -29,43 +29,39 @@ public class CreateMenu extends MenuTemplate implements Menu {
 	public void update(int x, int y, boolean pressed,
 			boolean released) {
 		
-		if(inRect(x, y, back) && pressed)
+		if (inRect(x, y, back) && pressed)
 			backColor = Color.GRAY.darker();
-		else
-			if(inRect(x, y, back) && released) {
-				backColor = Color.GRAY;
-				MenuManager.setCurrentMenu(Menus.main);
-			}
+		else if (inRect(x, y, back) && released) {
+			backColor = Color.GRAY;
+			MenuManager.setCurrentMenu(Menus.main);
+		}
 		
 		// button 1
-		if(inRect(x, y, world1) && pressed) 
+		if (inRect(x, y, world1) && pressed)
 			world1Color = Color.GRAY.darker();
-		else
-			if(inRect(x, y, world1) && released) {
-				world1Color = Color.GRAY;
-				CreateOptionsMenu.passInValue(Worlds.create1);
-				MenuManager.setCurrentMenu(Menus.options);
-			}
+		else if (inRect(x, y, world1) && released) {
+			world1Color = Color.GRAY;
+			CreateOptionsMenu.passInValue(Worlds.create1);
+			MenuManager.setCurrentMenu(Menus.options);
+		}
 		
 		// button 2
-		if(inRect(x, y, world2) && pressed) 
+		if (inRect(x, y, world2) && pressed)
 			world2Color = Color.GRAY.darker();
-		else
-			if(inRect(x, y, world2) && released) {
-				world2Color = Color.GRAY;
-				CreateOptionsMenu.passInValue(Worlds.create2);
-				MenuManager.setCurrentMenu(Menus.options);
-			}
+		else if (inRect(x, y, world2) && released) {
+			world2Color = Color.GRAY;
+			CreateOptionsMenu.passInValue(Worlds.create2);
+			MenuManager.setCurrentMenu(Menus.options);
+		}
 		
 		// button 3
-		if(inRect(x, y, world3) && pressed) 
+		if (inRect(x, y, world3) && pressed)
 			world3Color = Color.GRAY.darker();
-		else
-			if(inRect(x, y, world3) && released) {
-				world3Color = Color.GRAY;
-				CreateOptionsMenu.passInValue(Worlds.create3);
-				MenuManager.setCurrentMenu(Menus.options);
-			}
+		else if (inRect(x, y, world3) && released) {
+			world3Color = Color.GRAY;
+			CreateOptionsMenu.passInValue(Worlds.create3);
+			MenuManager.setCurrentMenu(Menus.options);
+		}
 	}
 	
 	@Override

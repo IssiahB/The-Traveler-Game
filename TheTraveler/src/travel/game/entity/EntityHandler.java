@@ -9,13 +9,13 @@ public class EntityHandler {
 	private List<Entity> objects = new ArrayList<Entity>();
 	
 	public void update() {
-		for(int i = 0; i < objects.size(); i++) {
+		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).update(this);
 		}
 	}
 	
 	public void render(Graphics g) {
-		for(int i = 0; i < objects.size(); i++) {
+		for (int i = 0; i < objects.size(); i++) {
 			objects.get(i).render(g);
 		}
 	}
@@ -31,7 +31,7 @@ public class EntityHandler {
 	public void cleanUp() {
 		objects.clear();
 	}
-
+	
 	public List<Entity> getObjects() {
 		return objects;
 	}

@@ -105,87 +105,92 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	public void update(int x, int y, boolean pressed,
 			boolean released) {
 		
-		// hide action 
+		// hide action
 		if (inRect(x, y, hide) && pressed) {
 			hideColor = Color.GRAY.darker();
 			pressed = false;
 			released = true;
-		} else
-			if (inRect(x, y, hide) && released) {
-				hideColor = Color.GRAY;
-				hidden++;
-				if(hidden == 1)
-					isHidden = true;
-				if(hidden == 2) {
-					isHidden = false;
-					hidden = 0;
-				}
-				
+		} else if (inRect(x, y, hide) && released) {
+			hideColor = Color.GRAY;
+			hidden++;
+			if (hidden == 1)
+				isHidden = true;
+			if (hidden == 2) {
+				isHidden = false;
+				hidden = 0;
 			}
+			
+		}
 		
 		// delete action
 		if (inRect(x, y, delete) && pressed) {
 			deleteColor = Color.GRAY.darker();
 			selected = ImageSelected.none;
-		} else
-			if (inRect(x, y, delete) && released) {
-				deleteColor = Color.GRAY;
-				deleting++;
-				if(deleting == 1) {
-					isDeleting = true;
-				}
-				if(deleting == 2) {
-					isDeleting = false;
-					deleting = 0;
-				}
+		} else if (inRect(x, y, delete) && released) {
+			deleteColor = Color.GRAY;
+			deleting++;
+			if (deleting == 1) {
+				isDeleting = true;
 			}
+			if (deleting == 2) {
+				isDeleting = false;
+				deleting = 0;
+			}
+		}
 		
 		if (!isHidden) {
 			// done action
 			if (inRect(x, y, done) && pressed) {
 				doneColor = Color.GRAY.darker();
 				selected = ImageSelected.none;
-			} else
-				if (inRect(x, y, done) && released) {
+			} else if (inRect(x, y, done) && released) {
 				doneColor = Color.GRAY;
 				
 				setUpForFileSaving();
-				OutputFile.setUp(width, height, playerX, playerY, exitX,
-						exitY, enemyPos, blockPos, blockSlidable, lavaPos,
+				OutputFile.setUp(width, height, playerX, playerY,
+						exitX,
+						exitY, enemyPos, blockPos, blockSlidable,
+						lavaPos,
 						lavaSlidable);
-				OutputFile.writeFile("res/worlds/create/"+world+".lvl");
+				OutputFile.writeFile(
+						"res/worlds/create/" + world + ".lvl");
 				reset();
 				MenuManager.setCurrentMenu(Menus.options);
 				return;
 			}
 			
-			if(!isDeleting) {
+			if (!isDeleting) {
 				// checks if selected any image
-				switchSelectedImage(x, y, released, exit, ImageSelected.exit);
-				switchSelectedImage(x, y, released, player, ImageSelected.player);
-				switchSelectedImage(x, y, released, enemy, ImageSelected.enemy);
-				switchSelectedImage(x, y, released, block, ImageSelected.block);
-				switchSelectedImage(x, y, released, lava, ImageSelected.lava);
+				switchSelectedImage(x, y, released, exit,
+						ImageSelected.exit);
+				switchSelectedImage(x, y, released, player,
+						ImageSelected.player);
+				switchSelectedImage(x, y, released, enemy,
+						ImageSelected.enemy);
+				switchSelectedImage(x, y, released, block,
+						ImageSelected.block);
+				switchSelectedImage(x, y, released, lava,
+						ImageSelected.lava);
 			}
 		}
 		
-		if(isDeleting) {
-			for (Point pos: entities) {
+		if (isDeleting) {
+			for (Point pos : entities) {
 				Rectangle rect = new Rectangle(pos.x, pos.y, 50, 50);
 				if (inRect(x, y, rect)) {
 					
-					if(enemyPos != null)
-						if(enemyPos.contains(pos))
+					if (enemyPos != null)
+						if (enemyPos.contains(pos))
 							enemyPos.remove(pos);
-					
-					if(blockPos != null)
-						if(blockPos.contains(pos)) {
+						
+					if (blockPos != null)
+						if (blockPos.contains(pos)) {
 							int index = blockPos.indexOf(pos);
 							blockPos.remove(pos);
 							blockSlidable.remove(index);
 						}
-					if(lavaPos != null)
-						if(lavaPos.contains(pos)) {
+					if (lavaPos != null)
+						if (lavaPos.contains(pos)) {
 							int index = lavaPos.indexOf(pos);
 							lavaPos.remove(pos);
 							blockSlidable.remove(index);
@@ -197,24 +202,24 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		// placing entities
 		if (x <= width && y <= height
 				&& selected != ImageSelected.none && pressed) {
+			
+			if (!isDeleting) {
+				if (isHidden && inSelectors(x, y))
+					addBlocks(x, y + 25);
 				
-				if (!isDeleting) {
-					if(isHidden && inSelectors(x, y))
-						addBlocks(x, y + 25);
-					
-					if(!isHidden && !inSelectors(x, y))
-						addBlocks(x, y + 25);
-					
-					if(isHidden)
-						addBlocks(x, y + 25);
-				}
+				if (!isHidden && !inSelectors(x, y))
+					addBlocks(x, y + 25);
 				
+				if (isHidden)
+					addBlocks(x, y + 25);
+			}
+			
 		}
 	}
 	
 	@Override
 	public void render(Graphics g) {
-		if(loadWorld)
+		if (loadWorld)
 			getFileValues();
 		
 		Graphics2D g2 = (Graphics2D) g;
@@ -254,7 +259,8 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		// draw all the lava blocks if user has added some
 		if (lavaPos != null) {
 			for (int i = 0; i < lavaPos.size(); i++) {
-				g.drawImage(lavaImage, lavaPos.get(i).x, lavaPos.get(i).y, 50, 50, null);
+				g.drawImage(lavaImage, lavaPos.get(i).x,
+						lavaPos.get(i).y, 50, 50, null);
 			}
 		}
 		
@@ -262,7 +268,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		drawButton(g2, hide, hideColor);
 		g.setColor(Color.white);
 		g.setFont(new Font("TimesNewRoman", 3, 20));
-		if (!isHidden) 
+		if (!isHidden)
 			g.drawString("Hide", hide.x + 10, hide.y + 20);
 		else
 			g.drawString("Show", hide.x + 3, hide.y + 20);
@@ -273,7 +279,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		g.setFont(new Font("TimesNewRoman", 3, 25));
 		if (!isDeleting)
 			g.drawString("Delete", delete.x + 9, delete.y + 27);
-		else 
+		else
 			g.drawString("Select", delete.x + 9, delete.y + 27);
 		
 		// draws selected image if selected
@@ -292,7 +298,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 			// draw done button
 			drawButton(g2, done, doneColor);
 			g.setColor(Color.white);
-			g.setFont(new Font("TimesNewRoman", 3, 25));				
+			g.setFont(new Font("TimesNewRoman", 3, 25));
 			g.drawString("Done", done.x + 18, done.y + 27);
 		}
 	}
@@ -325,24 +331,24 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	}
 	
 	private void setUpForFileSaving() {
-		if(exitX == -1 || exitY == -1) {
+		if (exitX == -1 || exitY == -1) {
 			exitX = 0;
 			exitY = 0;
 		}
 		
-		if(playerX == -1 || playerY == -1) {
+		if (playerX == -1 || playerY == -1) {
 			playerX = 0;
 			playerY = 0;
 		}
-		if(enemyPos == null)
+		if (enemyPos == null)
 			enemyPos = new ArrayList<Point>();
-		if(blockPos == null)
+		if (blockPos == null)
 			blockPos = new ArrayList<Point>();
-		if(lavaPos == null)
+		if (lavaPos == null)
 			lavaPos = new ArrayList<Point>();
-		if(blockSlidable == null) 
+		if (blockSlidable == null)
 			blockSlidable = new ArrayList<ISlidable>();
-		if(lavaSlidable == null) 
+		if (lavaSlidable == null)
 			lavaSlidable = new ArrayList<ISlidable>();
 	}
 	
@@ -393,8 +399,8 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 			blockPos = new ArrayList<Point>();
 			blockSlidable = new ArrayList<ISlidable>();
 		}
-			
-		if(blockPos.size() >= 30) {
+		
+		if (blockPos.size() >= 30) {
 			blockPos.remove(0);
 			blockSlidable.remove(0);
 		}
@@ -408,7 +414,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 			lavaPos = new ArrayList<Point>();
 			lavaSlidable = new ArrayList<ISlidable>();
 		}
-		if(lavaPos.size() >= 5) {
+		if (lavaPos.size() >= 5) {
 			lavaPos.remove(0);
 			lavaSlidable.remove(0);
 		}
@@ -418,20 +424,27 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	}
 	
 	private void addSlidable(List<ISlidable> list) {
-		int slidable = JOptionPane.showConfirmDialog(null, "Does This Block Slide?", "Slide",
+		int slidable = JOptionPane.showConfirmDialog(null,
+				"Does This Block Slide?", "Slide",
 				JOptionPane.YES_NO_OPTION);
 		
-		if(slidable == 0) {
-			String[] options = {"Horizontal", "Vertical"};
-			int direction = JOptionPane.showOptionDialog(null, "Choose Direction", "Direction",
-					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, 0);
+		if (slidable == 0) {
+			String[] options = { "Horizontal", "Vertical" };
+			int direction = JOptionPane.showOptionDialog(null,
+					"Choose Direction", "Direction",
+					JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, options, 0);
 			int speed = getSpeed();
 			int distance = getDistance();
 			
-			if(direction == 0)
-				list.add(new SlideHorizontal().setHorizontalDistanceAndSpeed(distance, speed));
+			if (direction == 0)
+				list.add(new SlideHorizontal()
+						.setHorizontalDistanceAndSpeed(distance,
+								speed));
 			else
-				list.add(new SlideVertical().setVerticalDistanceAndSpeed(distance, speed));
+				list.add(new SlideVertical()
+						.setVerticalDistanceAndSpeed(distance,
+								speed));
 		} else {
 			list.add(new SlideNone());
 		}
@@ -440,7 +453,9 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	private int getSpeed() {
 		int speed = 0;
 		try {
-			String strSpeed = JOptionPane.showInputDialog(null, "Give Speed | (MAX = 6)", "Speed", JOptionPane.QUESTION_MESSAGE);
+			String strSpeed = JOptionPane.showInputDialog(null,
+					"Give Speed | (MAX = 6)", "Speed",
+					JOptionPane.QUESTION_MESSAGE);
 			speed = Integer.parseInt(strSpeed);
 			
 			if (speed > 6 || speed < 1) {
@@ -457,7 +472,9 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	private int getDistance() {
 		int distance = 0;
 		try {
-			String strDistance = JOptionPane.showInputDialog(null, "Give Distance | (MAX = 100)", "Distance", JOptionPane.QUESTION_MESSAGE);
+			String strDistance = JOptionPane.showInputDialog(null,
+					"Give Distance | (MAX = 100)", "Distance",
+					JOptionPane.QUESTION_MESSAGE);
 			distance = Integer.parseInt(strDistance);
 			
 			if (distance > 100 || distance < 1)
@@ -482,7 +499,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	}
 	
 	private void getFileValues() {
-		InputFile.readFile("res/worlds/create/"+world+".lvl");
+		InputFile.readFile("res/worlds/create/" + world + ".lvl");
 		width = InputFile.getWidth();
 		height = InputFile.getHeight();
 		playerX = InputFile.getX();
@@ -496,19 +513,23 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		blockSlidable = new ArrayList<ISlidable>();
 		lavaSlidable = new ArrayList<ISlidable>();
 		
-		for(int i = 0; i < InputFile.getEnemyPosition().size(); i++) {
+		for (int i = 0; i < InputFile.getEnemyPosition()
+				.size(); i++) {
 			enemyPos.add(InputFile.getEnemyPosition().get(i));
 		}
-		for(int i = 0; i < InputFile.getBlockPosition().size(); i++) {
+		for (int i = 0; i < InputFile.getBlockPosition()
+				.size(); i++) {
 			blockPos.add(InputFile.getBlockPosition().get(i));
 		}
-		for(int i = 0; i < InputFile.getLavaPosition().size(); i++) {
+		for (int i = 0; i < InputFile.getLavaPosition().size(); i++) {
 			lavaPos.add(InputFile.getLavaPosition().get(i));
 		}
-		for(int i = 0; i < InputFile.getBlockSlidables().size(); i++) {
+		for (int i = 0; i < InputFile.getBlockSlidables()
+				.size(); i++) {
 			blockSlidable.add(InputFile.getBlockSlidables().get(i));
 		}
-		for(int i = 0; i < InputFile.getLavaSlidables().size(); i++) {
+		for (int i = 0; i < InputFile.getLavaSlidables()
+				.size(); i++) {
 			lavaSlidable.add(InputFile.getLavaSlidables().get(i));
 		}
 		entities.addAll(enemyPos);

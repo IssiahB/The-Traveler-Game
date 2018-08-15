@@ -15,7 +15,7 @@ import travel.game.worlds.WorldHandler;
 
 public class Loop implements Runnable {
 	// game variables
-	private String title;
+	private static String title;
 	private static int width, height;
 	private boolean running = false;
 	
@@ -36,7 +36,7 @@ public class Loop implements Runnable {
 	public Loop(String title, int width, int height) {
 		Loop.width = width;
 		Loop.height = height;
-		this.title = title;
+		Loop.title = title;
 	}
 	
 	// starts the thread
@@ -68,7 +68,7 @@ public class Loop implements Runnable {
 	}
 	
 	private void cleanUp() {
-		if(display.getFrame().isVisible())
+		if (display.getFrame().isVisible())
 			display.getFrame().dispose();
 		
 		WorldHandler.clearWorld();
@@ -182,7 +182,7 @@ public class Loop implements Runnable {
 		g.dispose();
 	}
 	
-	public String getTitle() {
+	public static String getTitle() {
 		return title;
 	}
 	

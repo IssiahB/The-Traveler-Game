@@ -11,23 +11,25 @@ public class SlideHorizontal implements ISlidable {
 	private boolean down = false;
 	
 	private byte firstCall = 0;
-
+	
 	@Override
 	public void slide(Entity entity) {
-		if(firstCall == 0) {
+		if (firstCall == 0) {
 			farLeftPosition = (entity.getX() - distance);
-			farRightPosition = ((entity.getX() + entity.getWidth()) + distance);
+			farRightPosition = ((entity.getX() + entity.getWidth())
+					+ distance);
 			firstCall++;
 		}
 		
-		if(entity.getX() > farLeftPosition && up == true) {
+		if (entity.getX() > farLeftPosition && up == true) {
 			entity.setX(entity.getX() - speed);
 		} else {
 			up = false;
 			down = true;
 		}
 		
-		if((entity.getX() + entity.getWidth()) < farRightPosition && down == true) {
+		if ((entity.getX() + entity.getWidth()) < farRightPosition
+				&& down == true) {
 			entity.setX(entity.getX() + speed);
 		} else {
 			up = true;
@@ -35,7 +37,8 @@ public class SlideHorizontal implements ISlidable {
 		}
 	}
 	
-	public ISlidable setHorizontalDistanceAndSpeed(int distance, int speed) {
+	public ISlidable setHorizontalDistanceAndSpeed(int distance,
+			int speed) {
 		this.distance = distance;
 		this.speed = speed;
 		return this;
@@ -50,5 +53,5 @@ public class SlideHorizontal implements ISlidable {
 	public int getSpeed() {
 		return speed;
 	}
-
+	
 }
