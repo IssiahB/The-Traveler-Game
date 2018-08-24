@@ -304,6 +304,28 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	}
 	
 	private void addBlocks(int x, int y) {
+		// make sure block is not off map
+		if((x + 50) > width)
+			x = width - 50;
+		if((y + 50) > height)
+			y = height - 50;
+		
+		// make sure no two blocks are placed in the s
+		if(enemyPos != null)
+			if(enemyPos.contains(new Point(x, y)))
+				return;
+		if(blockPos != null)
+			if(blockPos.contains(new Point(x, y)))
+				return;
+		if(lavaPos != null)
+			if(lavaPos.contains(new Point(x, y)))
+				return;
+		
+		if(playerX == x && playerY == y)
+			return;
+		if(exitX == x && exitY == y)
+			return;
+		
 		switch (selected) {
 			case exit:
 				exitX = x;
@@ -314,16 +336,16 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 				playerY = y;
 				break;
 			case enemy:
-				addEnemy(x, y);
 				entities.add(new Point(x, y));
+				addEnemy(x, y);
 				break;
 			case block:
-				addBlock(x, y);
 				entities.add(new Point(x, y));
+				addBlock(x, y);
 				break;
 			case lava:
-				addLava(x, y);
 				entities.add(new Point(x, y));
+				addLava(x, y);
 				break;
 			default:
 				return;
@@ -388,8 +410,10 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	private void addEnemy(int x, int y) {
 		if (enemyPos == null)
 			enemyPos = new ArrayList<Point>();
-		if (enemyPos.size() >= 15)
+		if (enemyPos.size() >= 15) {
+			entities.remove(enemyPos.get(0));
 			enemyPos.remove(0);
+		}
 		
 		enemyPos.add(new Point(x, y));
 	}
@@ -401,6 +425,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		}
 		
 		if (blockPos.size() >= 30) {
+			entities.remove(blockPos.get(0));
 			blockPos.remove(0);
 			blockSlidable.remove(0);
 		}
@@ -415,6 +440,7 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 			lavaSlidable = new ArrayList<ISlidable>();
 		}
 		if (lavaPos.size() >= 5) {
+			entities.remove(lavaPos.get(0));
 			lavaPos.remove(0);
 			lavaSlidable.remove(0);
 		}
@@ -426,7 +452,12 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 	private void addSlidable(List<ISlidable> list) {
 		int slidable = JOptionPane.showConfirmDialog(null,
 				"Does This Block Slide?", "Slide",
-				JOptionPane.YES_NO_OPTION);
+				JOptionPane.YES_NO_CANCEL_OPTION);
+		
+		if (slidable == 2 || slidable == -1) {
+			endSlidableProcess(list);
+			return;
+		}
 		
 		if (slidable == 0) {
 			String[] options = { "Horizontal", "Vertical" };
@@ -434,8 +465,24 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 					"Choose Direction", "Direction",
 					JOptionPane.YES_NO_CANCEL_OPTION,
 					JOptionPane.QUESTION_MESSAGE, null, options, 0);
+			
+			if (direction == -1) {
+				endSlidableProcess(list);
+				return;
+			}
+				
+			
 			int speed = getSpeed();
+			if (speed == -1) {
+				endSlidableProcess(list);
+				return;
+			}
+			
 			int distance = getDistance();
+			if (distance == -1) {
+				endSlidableProcess(list);
+				return;
+			}
 			
 			if (direction == 0)
 				list.add(new SlideHorizontal()
@@ -450,12 +497,27 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 		}
 	}
 	
+	private void endSlidableProcess(List<ISlidable> list) {
+		if(blockSlidable != null)
+			if(list.hashCode() == blockSlidable.hashCode()) 
+				blockPos.remove(blockPos.size() - 1);
+		
+		if(lavaSlidable != null)
+			if(list.hashCode() == lavaSlidable.hashCode())
+				lavaPos.remove(lavaPos.size() - 1);
+		
+		entities.remove(entities.size() - 1);
+	}
+	
 	private int getSpeed() {
 		int speed = 0;
 		try {
 			String strSpeed = JOptionPane.showInputDialog(null,
 					"Give Speed | (MAX = 6)", "Speed",
 					JOptionPane.QUESTION_MESSAGE);
+			if (strSpeed == null)
+				return -1;
+			
 			speed = Integer.parseInt(strSpeed);
 			
 			if (speed > 6 || speed < 1) {
@@ -475,6 +537,9 @@ public class CreatorMenu extends MenuTemplate implements Menu {
 			String strDistance = JOptionPane.showInputDialog(null,
 					"Give Distance | (MAX = 100)", "Distance",
 					JOptionPane.QUESTION_MESSAGE);
+			if (strDistance == null)
+				return -1;
+			
 			distance = Integer.parseInt(strDistance);
 			
 			if (distance > 100 || distance < 1)

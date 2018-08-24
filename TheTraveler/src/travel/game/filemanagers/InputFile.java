@@ -44,7 +44,6 @@ public class InputFile {
 			// gets enemy
 			while ((tempX = s.nextInt()) != -1) {
 				tempY = s.nextInt();
-				System.out.println("Reading");
 				enemyPosition.add(new Point(tempX, tempY));
 			}
 			
